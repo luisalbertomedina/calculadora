@@ -1,7 +1,7 @@
 /**
  * Class Interpretador- evalúa la expresión en el árbol
  */
-package MVC.modelo;
+package modelo;
 
 public class Interprete {
 
