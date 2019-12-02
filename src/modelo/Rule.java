@@ -3,7 +3,7 @@
  * an integer kind for use in switches (implemented as a method because Java does
  * not override constants).
  */
-package MVC.modelo;
+package modelo;
 
 public abstract class Rule {
 
