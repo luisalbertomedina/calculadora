@@ -1,7 +1,7 @@
 /**
  * Class Gramática - produce reglas gramaticales para el interpretador
  */
-package MVC.modelo;
+package modelo;
 
 import java.util.StringTokenizer;
 
