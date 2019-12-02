@@ -6,7 +6,7 @@
  * token   = number | '+' | '-' | '*' | '/' | '^' | '(' | ')'
  * number = digit+ ('.' digit+)?
  */
-package MVC.modelo;
+package modelo;
 
 import java.util.*;
 
