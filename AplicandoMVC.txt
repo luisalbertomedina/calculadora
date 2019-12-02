@@ -1,0 +1,3 @@
+Se aplicó MVC al Proyecto,
+se cambiaron algunos nombres de las clases en el controlador,
+se acambió de lugar el MVC(ControladorPrincipal al paquete de controlador)
