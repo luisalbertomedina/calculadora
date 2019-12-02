@@ -2,7 +2,7 @@
  * A Program object holds a program or program component (file/module/class..).
  * It contains the source text, token array, symbol table, and parse tree.
  */
-package MVC.modelo;
+package modelo;
 
 public class Program {
 
