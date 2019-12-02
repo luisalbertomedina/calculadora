@@ -14,7 +14,7 @@
  *
  * The build methods allow a tree node of a given kind to be built.
  */
-package MVC.modelo;
+package modelo;
 
 public abstract class Tree {
 
