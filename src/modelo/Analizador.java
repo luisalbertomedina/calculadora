@@ -1,6 +1,7 @@
 /* Class Analizador - parses the Calc language using a simple interpretive
 recursive descent parser. */
-package MVC.modelo;
+package modelo;
+
 
 import java.util.*;
 
