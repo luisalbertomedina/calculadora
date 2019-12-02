@@ -2,7 +2,7 @@
  * Un símbolo tiene una palabra asociada de acuerdo a un código establecido, un entero para identificar qué tipo de símbolo es,
  * y un valor (para números). Una lista de las llaves de los símbolos que se proveen.
  */
-package MVC.modelo;
+package modelo;
 
 public class Symbol {
 
