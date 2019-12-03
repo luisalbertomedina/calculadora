@@ -24,8 +24,8 @@ public abstract class Rule {
 
         int symbolKind;
 
-        Skip(int k) {
-            symbolKind = k;
+        Skip(int kind) {
+            symbolKind = kind;
         }
 
         @Override
@@ -39,8 +39,8 @@ public abstract class Rule {
 
         int symbolKind;
 
-        Accept(int k) {
-            symbolKind = k;
+        Accept(int kind) {
+            symbolKind = kind;
         }
 
         @Override
@@ -54,9 +54,9 @@ public abstract class Rule {
 
         int kind, size;
 
-        Build(int k, int n) {
-            kind = k;
-            size = n;
+        Build(int kind, int size) {
+            this.kind = kind;
+            this.size = size;
         }
 
         @Override
@@ -70,9 +70,9 @@ public abstract class Rule {
 
         int left, right;
 
-        Then(int l, int r) {
-            left = l;
-            right = r;
+        Then(int left, int right) {
+            this.left = left;
+            this.right = right;
         }
 
         @Override
@@ -86,9 +86,9 @@ public abstract class Rule {
 
         int left, right;
 
-        Or(int l, int r) {
-            left = l;
-            right = r;
+        Or(int left, int right) {
+            this.left = left;
+            this.right = right;
         }
 
         @Override

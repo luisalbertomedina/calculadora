@@ -57,71 +57,71 @@ public class Analizador {
         }
     }
 
-    private void parse(Rule.Then r) throws Exception {
-        parse(rules[r.left]);
-        parse(rules[r.right]);
+    private void parse(Rule.Then rule) throws Exception {
+        parse(rules[rule.left]);
+        parse(rules[rule.right]);
     }
 
-    private void parse(Rule.Or r) throws Exception {
-        if (startsWith(rules[r.left], nextKind)) {
-            parse(rules[r.left]);
+    private void parse(Rule.Or rule) throws Exception {
+        if (startsWith(rules[rule.left], nextKind)) {
+            parse(rules[rule.left]);
         } else {
-            parse(rules[r.right]);
+            parse(rules[rule.right]);
         }
     }
 
-    private void parse(Rule.Skip r) throws Exception {
-        if (nextKind == r.symbolKind) {
+    private void parse(Rule.Skip rule) throws Exception {
+        if (nextKind == rule.symbolKind) {
             next++;
             if (nextKind != Simbolo.END) {
                 nextKind = symbols[tokens[next].ref].tipooperador;
             }
         } else {
-            report(tokens[next].start, nextKind, r.symbolKind);
+            report(tokens[next].start, nextKind, rule.symbolKind);
         }
     }
 
-    private void parse(Rule.Accept r) throws Exception {
-        if (nextKind == r.symbolKind) {
+    private void parse(Rule.Accept rule) throws Exception {
+        if (nextKind == rule.symbolKind) {
             nodes.add(new Tree.Id(tokens[next].ref, tokens[next].start));
             next++;
             nextKind = symbols[tokens[next].ref].tipooperador;
         } else {
-            report(tokens[next].start, nextKind, r.symbolKind);
+            report(tokens[next].start, nextKind, rule.symbolKind);
         }
     }
 
-    private void parse(Rule.Build r) throws Exception {
-        Tree node1, node2;
-        if (r.size == 1) {
-            node1 = (Tree) nodes.pop();
-            nodes.add(Tree.build1(r.kind, node1));
-        } else if (r.size == 2) {
-            node2 = (Tree) nodes.pop();
-            node1 = (Tree) nodes.pop();
-            nodes.add(Tree.build2(r.kind, node1, node2));
+    private void parse(Rule.Build rule) throws Exception {
+        Tree firstNode, secondNode;
+        if (rule.size == 1) {
+            firstNode = (Tree) nodes.pop();
+            nodes.add(Tree.build1(rule.kind, firstNode));
+        } else if (rule.size == 2) {
+            secondNode = (Tree) nodes.pop();
+            firstNode = (Tree) nodes.pop();
+            nodes.add(Tree.build2(rule.kind, firstNode, secondNode));
         } else {
             throw new Exception("Internal error: unimplemented node size");
         }
     }
 
-    private boolean startsWith(Rule r, int symbolKind) {
-        int ruleKind = r.getKind();
+    private boolean startsWith(Rule rule, int symbolKind) {
+        int ruleKind = rule.getKind();
         boolean result;
         switch (ruleKind) {
             case Rule.THEN: {
-                Rule.Then rt = (Rule.Then) r;
-                result = startsWith(rules[rt.left], symbolKind);
+                Rule.Then ruleThen = (Rule.Then) rule;
+                result = startsWith(rules[ruleThen.left], symbolKind);
             }
             break;
             case Rule.SKIP: {
-                Rule.Skip rk = (Rule.Skip) r;
-                result = rk.symbolKind == symbolKind;
+                Rule.Skip ruleSkip = (Rule.Skip) rule;
+                result = ruleSkip.symbolKind == symbolKind;
             }
             break;
             case Rule.ACCEPT: {
-                Rule.Accept rs = (Rule.Accept) r;
-                result = rs.symbolKind == symbolKind;
+                Rule.Accept ruleAccept = (Rule.Accept) rule;
+                result = ruleAccept.symbolKind == symbolKind;
             }
             break;
             default:
