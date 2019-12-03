@@ -11,9 +11,7 @@ public abstract class Rule {
 
     abstract int getKind();
 
-    /**
-     * The empty rule (consume no input, build no tree node)
-     */
+  
     public static class Empty extends Rule {
 
         Empty() {
@@ -25,9 +23,7 @@ public abstract class Rule {
         }
     }
 
-    /**
-     * The skip rule (move past a key token without building anything)
-     */
+  
     public static class Skip extends Rule {
 
         int symbolKind;
@@ -42,9 +38,7 @@ public abstract class Rule {
         }
     }
 
-    /**
-     * The accept rule (accept a token and build a leaf node from it)
-     */
+    
     public static class Accept extends Rule {
 
         int symbolKind;
@@ -59,9 +53,7 @@ public abstract class Rule {
         }
     }
 
-    /**
-     * The build rule (ignore input, build a compound tree node with n subnodes)
-     */
+   
     public static class Build extends Rule {
 
         int kind, size;
@@ -77,9 +69,7 @@ public abstract class Rule {
         }
     }
 
-    /**
-     * The then rule (deal with the two subrules one after the other)
-     */
+   
     public static class Then extends Rule {
 
         int left, right;
@@ -95,9 +85,7 @@ public abstract class Rule {
         }
     }
 
-    /**
-     * The or rule (choose one of the two alternative subrules)
-     */
+
     public static class Or extends Rule {
 
         int left, right;
