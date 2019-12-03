@@ -13,9 +13,7 @@ public class Analizador {
     private int next, nextKind;
     private Stack nodes;
 
-    /**
-     * Initialise the grammar rules.
-     */
+    /* Inicializa reglas gramaticales.*/
     public Analizador() {
         Grammar grammar = new Grammar();
         rules = grammar.rules;
@@ -31,16 +29,12 @@ public class Analizador {
         parse(rules[0]);
         if (nodes.size() != 1) {
             throw new Exception("Internal error: parse produces wrong no of nodes");
-            //System.out.println("Internal error: parse produces wrong no of nodes");
-            //System.exit(1);
         }
         program.tree = (Tree) nodes.pop();
         return program;
     }
 
-    /**
-     * This is the interpretive recursive descent parser
-     */
+    
     private void parse(Rule rule) throws Exception {
         switch (rule.getKind()) {
             case Rule.THEN:
@@ -143,14 +137,6 @@ public class Analizador {
         if (found == Simbolo.BAD_CHAR) {
             message = "Error Léxico";
         } 
-      /*  
-        else if (found == Symbol.BAD_NUMBER) {
-            message = "Numero Incompleto";
-        } else if (expecting == Symbol.END) {
-            message = "Expecting end of input";
-        } else if (expecting == Symbol.NUMBER) {
-            message = "Se espera un Numero";
-        } */
         else {
             int n = -1;
             for (int i = 0; i < Simbolo.keys.length; i++) {
@@ -158,7 +144,7 @@ public class Analizador {
                     n = i;
                 }
             }
-            message = "Error Sintáctico " ;//+ Symbol.keys[n].spelling;
+            message = "Error Sintáctico " ;
         }
         throw new Exception(message);
     }
