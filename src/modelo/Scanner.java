@@ -1,10 +1,7 @@
-/**
- * Convierte la expresión en tokens.
- * 
- * Lenguaje:
- * program = (' ' | '\n' | token)*
- * token   = number | '+' | '-' | '*' | '/' | '^' | '(' | ')'
- * number = digit+ ('.' digit+)?
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package modelo;
 
@@ -13,9 +10,6 @@ import java.util.*;
 public class Scanner {
 
     /**
-     * 
-     * Crea un array de tokens y una tabla a partir de la expresión
-     *
      * @param program
      * @return
      */
@@ -39,9 +33,7 @@ public class Scanner {
         return text;
     }
 
-    /**
-     * Agrega salto de línea al final de cada línea
-     */
+  
     private String lines(String text) {
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < text.length(); i++) {
@@ -61,9 +53,7 @@ public class Scanner {
         return buffer.toString();
     }
 
-    /**
-     * Expand tabs, assuming tab stops every 8 columns
-     */
+  
     private String tabs(String text) {
         StringBuffer buffer = new StringBuffer();
         int col = 0;
@@ -87,12 +77,7 @@ public class Scanner {
         return buffer.toString();
     }
 
-    /**
-     * A pre-token is a temporary data structure for holding tokens after
-     * splitting, but before symbolizing. A pre-token has start and end
-     * positions in the source text, and a tentative kind tag, to be refined
-     * later by symbolize().
-     */
+
     private static class PreToken {
 
         int start, end, kind;
@@ -104,11 +89,7 @@ public class Scanner {
         }
     }
 
-    /**
-     * Split the prepared source text into pre-tokens. Key recognition is left
-     * to the symbolize stage. (In a larger language, simple keys would be
-     * recognized here, but keywords would be left to later.)
-     */
+
     private PreToken[] split(String source) {
         Vector toks = new Vector();
         for (int i = 0; i < source.length(); i++) {
@@ -141,9 +122,7 @@ public class Scanner {
         return (PreToken[]) toks.toArray(new PreToken[0]);
     }
 
-    /**
-     * Get a number from the source text, starting at a given position
-     */
+  
     private PreToken number(String source, int i) {
         PreToken num;
         int j = i, n = source.length();
@@ -166,9 +145,7 @@ public class Scanner {
         return num;
     }
 
-    /**
-     * Convert the pre-tokens into tokens which refer to a symbol table
-     */
+  
     private void symbolize(Program program, PreToken[] toks) {
         String source = program.source;
         HashMap table = new HashMap();
