@@ -23,13 +23,13 @@ public class Analizador {
     }
 
    
-    public Program parse(Program program) throws Exception {
+    public Program analizar(Program program) throws Exception {
         tokens = program.tokens;
         symbols = program.simbolos;
         next = 0;
         nextKind = symbols[tokens[next].ref].tipooperador;
         nodes = new Stack();
-        parse(rules[0]);
+        analizar(rules[0]);
         if (nodes.size() != 1) {
             throw new Exception("error en el nodo");
             
@@ -39,63 +39,63 @@ public class Analizador {
     }
 
 
-    private void parse(Rule rule) throws Exception {
+    private void analizar(Rule rule) throws Exception {
         switch (rule.getKind()) {
             case Rule.THEN:
-                parse((Rule.Then) rule);
+                analizar((Rule.Then) rule);
                 break;
             case Rule.OR:
-                parse((Rule.Or) rule);
+                analizar((Rule.Or) rule);
                 break;
             case Rule.EMPTY:
                 break;
             case Rule.SKIP:
-                parse((Rule.Skip) rule);
+                analizar((Rule.Skip) rule);
                 break;
             case Rule.ACCEPT:
-                parse((Rule.Accept) rule);
+                analizar((Rule.Accept) rule);
                 break;
             case Rule.BUILD:
-                parse((Rule.Build) rule);
+                analizar((Rule.Build) rule);
                 break;
         }
     }
 
-    private void parse(Rule.Then r) throws Exception {
-        parse(rules[r.left]);
-        parse(rules[r.right]);
+    private void analizar(Rule.Then r) throws Exception {
+        analizar(rules[r.left]);
+        analizar(rules[r.right]);
     }
 
-    private void parse(Rule.Or r) throws Exception {
+    private void analizar(Rule.Or r) throws Exception {
         if (startsWith(rules[r.left], nextKind)) {
-            parse(rules[r.left]);
+            analizar(rules[r.left]);
         } else {
-            parse(rules[r.right]);
+            analizar(rules[r.right]);
         }
     }
 
-    private void parse(Rule.Skip r) throws Exception {
+    private void analizar(Rule.Skip r) throws Exception {
         if (nextKind == r.symbolKind) {
             next++;
             if (nextKind != Simbolo.END) {
                 nextKind = symbols[tokens[next].ref].tipooperador;
             }
         } else {
-            report(tokens[next].start, nextKind, r.symbolKind);
+            mensaje(tokens[next].start, nextKind, r.symbolKind);
         }
     }
 
-    private void parse(Rule.Accept r) throws Exception {
+    private void analizar(Rule.Accept r) throws Exception {
         if (nextKind == r.symbolKind) {
             nodes.add(new Tree.Id(tokens[next].ref, tokens[next].start));
             next++;
             nextKind = symbols[tokens[next].ref].tipooperador;
         } else {
-            report(tokens[next].start, nextKind, r.symbolKind);
+            mensaje(tokens[next].start, nextKind, r.symbolKind);
         }
     }
 
-    private void parse(Rule.Build r) throws Exception {
+    private void analizar(Rule.Build r) throws Exception {
         Tree node1, node2;
         if (r.size == 1) {
             node1 = (Tree) nodes.pop();
@@ -135,7 +135,7 @@ public class Analizador {
         return result;
     }
 
-    private void report(int pos, int found, int expecting) throws Exception {
+    private void mensaje(int pos, int found, int expecting) throws Exception {
         System.out.println("error encontrado en la posicion " + pos);
         String message;
         if (found == Simbolo.BAD_CHAR) {
