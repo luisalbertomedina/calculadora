@@ -1,6 +1,7 @@
-/**
- * Un token consiste en la posición del recurso y la referencia al símbolo
- * (que contiene el string del operador Ej. "-" y el tipo E. 1). Los tipos de símbolos son constantes.
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package modelo;
 
