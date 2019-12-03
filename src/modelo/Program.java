@@ -1,20 +1,17 @@
-/**
- * A Program object holds a program or program component (file/module/class..).
- * It contains the source text, token array, symbol table, and parse tree.
- */
+
 package modelo;
 
 public class Program {
 
     String source;
     Token[] tokens;
-    Symbol[] symbols;
+    Simbolo[] simbolos;
     Tree tree;
 
     public Program(String text) {
         source = text;
         tokens = null;
-        symbols = null;
+        simbolos = null;
         tree = null;
     }
 
@@ -23,7 +20,6 @@ public class Program {
      * can be found. A Range is specified by two character positions.
      */
     public static class Range {
-
         int start;
         int end;
     }

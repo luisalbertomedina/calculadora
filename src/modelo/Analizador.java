@@ -9,7 +9,7 @@ public class Analizador {
 
     private Rule[] rules;
     private Token[] tokens;
-    private Symbol[] symbols;
+    private Simbolo[] symbols;
     private int next, nextKind;
     private Stack nodes;
 
@@ -21,18 +21,12 @@ public class Analizador {
         rules = grammar.rules;
     }
 
-    /**
-     * Parse a Calc program
-     *
-     * @param program
-     * @return
-     * @throws java.lang.Exception
-     */
+   
     public Program parse(Program program) throws Exception {
         tokens = program.tokens;
-        symbols = program.symbols;
+        symbols = program.simbolos;
         next = 0;
-        nextKind = symbols[tokens[next].ref].kind;
+        nextKind = symbols[tokens[next].ref].tipooperador;
         nodes = new Stack();
         parse(rules[0]);
         if (nodes.size() != 1) {
@@ -85,8 +79,8 @@ public class Analizador {
     private void parse(Rule.Skip r) throws Exception {
         if (nextKind == r.symbolKind) {
             next++;
-            if (nextKind != Symbol.END) {
-                nextKind = symbols[tokens[next].ref].kind;
+            if (nextKind != Simbolo.END) {
+                nextKind = symbols[tokens[next].ref].tipooperador;
             }
         } else {
             report(tokens[next].start, nextKind, r.symbolKind);
@@ -97,7 +91,7 @@ public class Analizador {
         if (nextKind == r.symbolKind) {
             nodes.add(new Tree.Id(tokens[next].ref, tokens[next].start));
             next++;
-            nextKind = symbols[tokens[next].ref].kind;
+            nextKind = symbols[tokens[next].ref].tipooperador;
         } else {
             report(tokens[next].start, nextKind, r.symbolKind);
         }
@@ -146,7 +140,7 @@ public class Analizador {
     private void report(int pos, int found, int expecting) throws Exception {
         System.out.println("error encontrado en la posicion " + pos);
         String message;
-        if (found == Symbol.BAD_CHAR) {
+        if (found == Simbolo.BAD_CHAR) {
             message = "Error Léxico";
         } 
       /*  
@@ -159,8 +153,8 @@ public class Analizador {
         } */
         else {
             int n = -1;
-            for (int i = 0; i < Symbol.keys.length; i++) {
-                if (expecting == Symbol.keys[i].kind) {
+            for (int i = 0; i < Simbolo.keys.length; i++) {
+                if (expecting == Simbolo.keys[i].tipooperador) {
                     n = i;
                 }
             }

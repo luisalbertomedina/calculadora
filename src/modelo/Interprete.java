@@ -1,17 +1,17 @@
 /**
- * Class Interpretador- evalúa la expresión en el árbol
+ * Clase Interpretador, evalúa la expresión en el árbol
  */
 package modelo;
 
 public class Interprete {
 
-    public Symbol[] symbols;
+    public Simbolo[] simbolos;
 
     public Interprete() {
     }
 
     public double interpret(Program program) {
-        symbols = program.symbols;
+        simbolos = program.simbolos;
         return eval(program.tree);
     }
 
@@ -39,7 +39,7 @@ public class Interprete {
     }
 
     private double eval(Tree.Id t) {
-        return symbols[t.ref].value;
+        return simbolos[t.ref].valor;
     }
 
     private double eval(Tree.Bracket t) {

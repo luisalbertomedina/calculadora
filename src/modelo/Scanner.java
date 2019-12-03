@@ -1,7 +1,7 @@
 /**
- * Provides a scan method which converts a source text into tokens.  The
- * lexical rules for the Calc language are
- *
+ * Convierte la expresión en tokens.
+ * 
+ * Lenguaje:
  * program = (' ' | '\n' | token)*
  * token   = number | '+' | '-' | '*' | '/' | '^' | '(' | ')'
  * number = digit+ ('.' digit+)?
@@ -13,7 +13,8 @@ import java.util.*;
 public class Scanner {
 
     /**
-     * Scan a source text, producing an array of tokens and symbol table
+     * 
+     * Crea un array de tokens y una tabla a partir de la expresión
      *
      * @param program
      * @return
@@ -25,9 +26,7 @@ public class Scanner {
         return program;
     }
 
-    /**
-     * Prepare the source text for processing
-     */
+    
     private String prepare(String text) {
         String s1 = escapes(text);
         String s2 = lines(s1);
@@ -35,15 +34,13 @@ public class Scanner {
         return s3;
     }
 
-    /**
-     * There is no escape processing at present.
-     */
+ 
     private String escapes(String text) {
         return text;
     }
 
     /**
-     * Convert line endings to Unix "\n" format, ensure last line has an end
+     * Agrega salto de línea al final de cada línea
      */
     private String lines(String text) {
         StringBuffer buffer = new StringBuffer();
@@ -136,11 +133,11 @@ public class Scanner {
                 }
                 break;
                 default:
-                    toks.add(new PreToken(i, i + 1, Symbol.KEY_OR_BAD_CHAR));
+                    toks.add(new PreToken(i, i + 1, Simbolo.KEY_OR_BAD_CHAR));
                     break;
             }
         }
-        toks.add(new PreToken(source.length(), source.length(), Symbol.END));
+        toks.add(new PreToken(source.length(), source.length(), Simbolo.END));
         return (PreToken[]) toks.toArray(new PreToken[0]);
     }
 
@@ -159,12 +156,12 @@ public class Scanner {
                 while (j < n && Character.isDigit(source.charAt(j))) {
                     j++;
                 }
-                num = new PreToken(i, j, Symbol.NUMBER);
+                num = new PreToken(i, j, Simbolo.NUMBER);
             } else {
-                num = new PreToken(i, j, Symbol.BAD_NUMBER);
+                num = new PreToken(i, j, Simbolo.BAD_NUMBER);
             }
         } else {
-            num = new PreToken(i, j, Symbol.NUMBER);
+            num = new PreToken(i, j, Simbolo.NUMBER);
         }
         return num;
     }
@@ -177,9 +174,9 @@ public class Scanner {
         HashMap table = new HashMap();
         Vector syms = new Vector();
         Token[] tokens = new Token[toks.length];
-        for (int i = 0; i < Symbol.keys.length; i++) {
-            syms.add(Symbol.keys[i]);
-            table.put(Symbol.keys[i].spelling, new Integer(i));
+        for (int i = 0; i < Simbolo.keys.length; i++) {
+            syms.add(Simbolo.keys[i]);
+            table.put(Simbolo.keys[i].operador, new Integer(i));
         }
         for (int i = 0; i < toks.length; i++) {
             PreToken tok = toks[i];
@@ -197,11 +194,11 @@ public class Scanner {
                 int r = syms.size();
                 if (tok.kind == Symbol.NUMBER) {
                     double val = Double.parseDouble(spelling);
-                    syms.add(new Symbol(spelling, tok.kind, val));
-                } else if (tok.kind == Symbol.KEY_OR_BAD_CHAR) {
-                    syms.add(new Symbol(spelling, Symbol.BAD_CHAR, 0.0));
+                    syms.add(new Simbolo(spelling, tok.kind, val));
+                } else if (tok.kind == Simbolo.KEY_OR_BAD_CHAR) {
+                    syms.add(new Simbolo(spelling, Simbolo.BAD_CHAR, 0.0));
                 } else {
-                    syms.add(new Symbol(spelling, tok.kind, 0.0));
+                    syms.add(new Simbolo(spelling, tok.kind, 0.0));
                 }
                 table.put(spelling, new Integer(r));
                 tokens[i] = new Token(tok.start, r);
@@ -209,7 +206,7 @@ public class Scanner {
                 tokens[i] = new Token(tok.start, ref.intValue());
             }
         }
-        program.symbols = (Symbol[]) syms.toArray(new Symbol[0]);
+        program.simbolos = (Simbolo[]) syms.toArray(new Simbolo[0]);
         program.tokens = tokens;
     }
 }
