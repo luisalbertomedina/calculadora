@@ -14,69 +14,10 @@ public class Scanner {
      * @return
      */
     public Program scan(Program program) {
-        program.source = prepare(program.source);
         PreToken[] toks = split(program.source);
         symbolize(program, toks);
         return program;
     }
-
-    
-    private String prepare(String text) {
-        String s1 = escapes(text);
-        String s2 = lines(s1);
-        String s3 = tabs(s2);
-        return s3;
-    }
-
- 
-    private String escapes(String text) {
-        return text;
-    }
-
-  
-    private String lines(String text) {
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c == '\r') {
-                if (i < text.length() - 1 && text.charAt(i + 1) == '\n') {
-                    i++;
-                }
-                buffer.append('\n');
-            } else {
-                buffer.append(c);
-            }
-        }
-        if (buffer.length() > 0 && buffer.charAt(buffer.length() - 1) != '\n') {
-            buffer.append('\n');
-        }
-        return buffer.toString();
-    }
-
-  
-    private String tabs(String text) {
-        StringBuffer buffer = new StringBuffer();
-        int col = 0;
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c == '\t') {
-                int skip = 8 - col % 8;
-                for (int j = 0; j < skip; j++) {
-                    buffer.append(' ');
-                }
-                col = col + skip;
-            } else {
-                buffer.append(c);
-                if (c == '\n') {
-                    col = 0;
-                } else {
-                    col++;
-                }
-            }
-        }
-        return buffer.toString();
-    }
-
 
     private static class PreToken {
 
