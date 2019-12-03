@@ -159,7 +159,6 @@ public class Scanner {
             PreToken tok = toks[i];
             String spelling;
             Integer ref;
-            // s.substring() does not cope with the empty substring at the end of s
             if (tok.start == source.length()) {
                 spelling = "";
             } else {
