@@ -1,5 +1,8 @@
-/* Class Analizador - parses the Calc language using a simple interpretive
-recursive descent parser. */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
 
@@ -13,9 +16,7 @@ public class Analizador {
     private int next, nextKind;
     private Stack nodes;
 
-    /**
-     * Initialise the grammar rules.
-     */
+    
     public Analizador() {
         Grammar grammar = new Grammar();
         rules = grammar.rules;
@@ -30,17 +31,14 @@ public class Analizador {
         nodes = new Stack();
         parse(rules[0]);
         if (nodes.size() != 1) {
-            throw new Exception("Internal error: parse produces wrong no of nodes");
-            //System.out.println("Internal error: parse produces wrong no of nodes");
-            //System.exit(1);
+            throw new Exception("error en el nodo");
+            
         }
         program.tree = (Tree) nodes.pop();
         return program;
     }
 
-    /**
-     * This is the interpretive recursive descent parser
-     */
+
     private void parse(Rule rule) throws Exception {
         switch (rule.getKind()) {
             case Rule.THEN:
@@ -107,7 +105,7 @@ public class Analizador {
             node1 = (Tree) nodes.pop();
             nodes.add(Tree.build2(r.kind, node1, node2));
         } else {
-            throw new Exception("Internal error: unimplemented node size");
+            throw new Exception("error en el tamaño del nodo");
         }
     }
 
@@ -143,14 +141,7 @@ public class Analizador {
         if (found == Simbolo.BAD_CHAR) {
             message = "Error Léxico";
         } 
-      /*  
-        else if (found == Symbol.BAD_NUMBER) {
-            message = "Numero Incompleto";
-        } else if (expecting == Symbol.END) {
-            message = "Expecting end of input";
-        } else if (expecting == Symbol.NUMBER) {
-            message = "Se espera un Numero";
-        } */
+   
         else {
             int n = -1;
             for (int i = 0; i < Simbolo.keys.length; i++) {
@@ -158,7 +149,7 @@ public class Analizador {
                     n = i;
                 }
             }
-            message = "Error Sintáctico " ;//+ Symbol.keys[n].spelling;
+            message = "Error Sintáctico " ;
         }
         throw new Exception(message);
     }
