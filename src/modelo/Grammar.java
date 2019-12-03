@@ -1,6 +1,9 @@
-/**
- * Class Gramática - produce reglas gramaticales para el interpretador
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+
 package modelo;
 
 import java.util.StringTokenizer;
@@ -13,10 +16,7 @@ public class Grammar {
         compile();
     }
 
-    /**
-     * The grammar is expressed as text in a restricted form of BNF, and a
-     * micro-compiler for BNF is used to create an array of rule nodes from it.
-     */
+   
     private static String[] grammar = {
         "program = expr end",
         "expr = term expr2",
@@ -44,13 +44,7 @@ public class Grammar {
         new Rule.Build(Tree.BRACKET, 1), new Rule.Empty()
     };
 
-    /**
-     * Convert the text of the grammar into an array of rules. As the rules are
-     * mutually recursive, an array of nodes is used, with indexes as pointers.
-     * (An alternative approach would be to create the top node of each
-     * definition first, with null pointers in it, and fill in the pointers in a
-     * second pass.)
-     */
+
     private void compile() {
         int ndefs = grammar.length;
         String[][] definitions = new String[ndefs][];
@@ -88,9 +82,7 @@ public class Grammar {
         }
     }
 
-    /**
-     * Split a string into tokens, assuming they are separated by white space.
-     */
+  
     private String[] scanDef(String text) {
         StringTokenizer scanner = new StringTokenizer(text);
         String[] tokens = new String[scanner.countTokens()];
@@ -100,9 +92,7 @@ public class Grammar {
         return tokens;
     }
 
-    /**
-     * Predict how many rule nodes will be needed by a grammar definition
-     */
+    
     private int sizeDef(String[] def) {
         int n = def.length - 3;
         for (int i = 2; i < def.length; i++) {
@@ -113,11 +103,6 @@ public class Grammar {
         return n;
     }
 
-    /**
-     * Convert a grammar definition def into rules, starting at index r in the
-     * rules array, using the array of rule names and their indexes in the rules
-     * array.
-     */
     private void parseDef(String[] def, int r, String[] names, int[] indexes) {
         int nalts;
         int[] altIndexes, altStarts, altEnds;
@@ -172,9 +157,7 @@ public class Grammar {
         parseAlts(altIndexes, r);
     }
 
-    /**
-     * Build a sequence of symbols into Then rules
-     */
+ 
     private void parseSeq(int[] items, int r) {
         for (int i = 0; i < items.length - 1; i++) {
             if (i < items.length - 2) {
@@ -185,9 +168,7 @@ public class Grammar {
         }
     }
 
-    /**
-     * Build a sequence of alternatives into Or rules
-     */
+   
     private void parseAlts(int[] alts, int r) {
         for (int i = 0; i < alts.length - 1; i++) {
             if (i < alts.length - 2) {
@@ -198,9 +179,6 @@ public class Grammar {
         }
     }
 
-    /*
-     Find the index of a string in an array of strings
-     */
     private int find(String s, String[] list) {
         int n = -1, i = 0;
         while (n < 0 && i < list.length) {
