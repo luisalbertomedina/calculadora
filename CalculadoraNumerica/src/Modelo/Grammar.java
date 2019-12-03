@@ -45,10 +45,10 @@ public class Grammar {
     private void compile() {
         int ndefs = grammar.length;
         String[][] definitions = new String[ndefs][];
-        int nitems = ndefs + primNames.length;
-        String[] names = new String[nitems];
-        int[] sizes = new int[nitems];
-        int[] indexes = new int[nitems];
+        int numItems = ndefs + primNames.length;
+        String[] names = new String[numItems];
+        int[] sizes = new int[numItems];
+        int[] indexes = new int[numItems];
 
         for (int i = 0; i < ndefs; i++) {
             definitions[i] = scanDef(grammar[i]);
@@ -70,7 +70,7 @@ public class Grammar {
             }
         }
 
-        rules = new Rule[indexes[nitems - 1] + sizes[nitems - 1]];
+        rules = new Rule[indexes[numItems - 1] + sizes[numItems - 1]];
         for (int i = 0; i < ndefs; i++) {
             parseDef(definitions[i], indexes[i], names, indexes);
         }
@@ -91,13 +91,13 @@ public class Grammar {
 
     
     private int sizeDef(String[] def) {
-        int n = def.length - 3;
+        int num = def.length - 3;
         for (int i = 2; i < def.length; i++) {
             if (def[i].equals("|")) {
-                n = n - 1;
+                num = num - 1;
             }
         }
-        return n;
+        return num;
     }
 
     
@@ -156,38 +156,38 @@ public class Grammar {
     }
 
     
-    private void parseSeq(int[] items, int r) {
+    private void parseSeq(int[] items, int numRule) {
         for (int i = 0; i < items.length - 1; i++) {
             if (i < items.length - 2) {
-                rules[r + i] = new Rule.Then(items[i], r + i + 1);
+                rules[numRule + i] = new Rule.Then(items[i], numRule + i + 1);
             } else {
-                rules[r + i] = new Rule.Then(items[i], items[i + 1]);
+                rules[numRule + i] = new Rule.Then(items[i], items[i + 1]);
             }
         }
     }
 
     
-    private void parseAlts(int[] alts, int r) {
+    private void parseAlts(int[] alts, int numRule) {
         for (int i = 0; i < alts.length - 1; i++) {
             if (i < alts.length - 2) {
-                rules[r + i] = new Rule.Or(alts[i], r + i + 1);
+                rules[numRule + i] = new Rule.Or(alts[i], numRule + i + 1);
             } else {
-                rules[r + i] = new Rule.Or(alts[i], alts[i + 1]);
+                rules[numRule + i] = new Rule.Or(alts[i], alts[i + 1]);
             }
         }
     }
 
     
-    private int find(String s, String[] list) {
+    private int find(String string, String[] list) {
         int n = -1, i = 0;
         while (n < 0 && i < list.length) {
-            if (list[i].equals(s)) {
+            if (list[i].equals(string)) {
                 n = i;
             }
             i++;
         }
         if (n < 0) {
-            System.out.println("Internal error: can't find " + s);
+            System.out.println("Internal error: can't find " + string);
             System.exit(1);
         }
         return n;
