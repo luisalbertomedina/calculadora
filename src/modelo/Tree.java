@@ -51,7 +51,7 @@ public abstract class Tree {
 
     abstract int getPostfix();
 
- 
+/* 
     public static class Error extends Tree {
 
         String message;
@@ -78,7 +78,7 @@ public abstract class Tree {
         }
     }
 
-  
+  */
     public static class Id extends Tree {
 
         int ref, start;
