@@ -27,7 +27,7 @@ public class Modelo {
         Interprete inter = new Interprete();
 
         program = escaner.scan(program);
-        program = Analizar.parse(program);
+        program = Analizar.analizar(program);
         this.resultado=inter.interpret(program);
 
         return this.resultado;
