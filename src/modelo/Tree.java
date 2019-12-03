@@ -51,31 +51,7 @@ public abstract class Tree {
 
     abstract int getPostfix();
 
-    public static class Id extends Tree {
-
-        int ref, start;
-
-        Id(int r, int s) {
-            ref = r;
-            start = s;
-        }
-
-        @Override
-        int getKind() {
-            return ID;
-        }
-
-        @Override
-        int getPrefix() {
-            return 0;
-        }
-
-        @Override
-        int getPostfix() {
-            return 0;
-        }
-    }
-
+   
 
     public static class Bracket extends Tree {
 

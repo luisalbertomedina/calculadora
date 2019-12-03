@@ -21,7 +21,7 @@ public class Interprete {
     private double eval(Tree tree) {
         switch (tree.getKind()) {
             case Tree.ID:
-                return eval((Tree.Id) tree);
+                return eval((Id) tree);
             case Tree.BRACKET:
                 return eval((Tree.Bracket) tree);
             case Tree.ADD:
@@ -41,7 +41,7 @@ public class Interprete {
         }
     }
 
-    private double eval(Tree.Id t) {
+    private double eval(Id t) {
         return simbolos[t.ref].valor;
     }
 

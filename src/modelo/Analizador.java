@@ -87,7 +87,7 @@ public class Analizador {
 
     private void analizar(Rule.Accept r) throws Exception {
         if (nextKind == r.symbolKind) {
-            nodes.add(new Tree.Id(tokens[next].ref, tokens[next].start));
+            nodes.add(new Id(tokens[next].ref, tokens[next].start));
             next++;
             nextKind = symbols[tokens[next].ref].tipooperador;
         } else {
