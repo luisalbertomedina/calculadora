@@ -6,30 +6,30 @@
 package modelo;
 
 
-public class modelo {
+public class Modelo {
 
    
     
-    private double result;
+    private double resultado;
 
-    public void setResult(double result) {
-        this.result = result;
+    public void setResultado(double resultado) {
+        this.resultado = resultado;
     }
 
-    public double getResult() {
-        return result;
+    public double getResultado() {
+        return resultado;
     }
 
     public double calc(String expresion) throws Exception {
         Program program = new Program(expresion);
-        Scanner scanner = new Scanner();
+        Scanner escaner = new Scanner();
         Analizador Analizar = new Analizador();
         Interprete inter = new Interprete();
 
-        program = scanner.scan(program);
+        program = escaner.scan(program);
         program = Analizar.parse(program);
-        this.result=inter.interpret(program);
+        this.resultado=inter.interpret(program);
 
-        return this.result;
+        return this.resultado;
     }
 }

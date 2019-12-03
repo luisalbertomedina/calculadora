@@ -6,7 +6,7 @@
 package Controlador;
 
 
-import modelo.modelo;
+import modelo.Modelo;
 import vista.vista;
 
 
@@ -16,11 +16,11 @@ import vista.vista;
  */
 public class ControladorPrincipal{
     public static void main(String[] args) {
-        modelo mode =new modelo();
-        vista view =new vista();
-        ControladorVista ctrl = new ControladorVista(view, mode);
+        Modelo modelo =new Modelo();
+        vista vista =new vista();
+        ControladorVista ctrl = new ControladorVista(vista, modelo);
         ctrl.iniciar();
-        view.setVisible(true);
+        vista.setVisible(true);
         
     }
 }

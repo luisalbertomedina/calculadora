@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import modelo.modelo;
+import modelo.Modelo;
 import vista.vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,34 +13,32 @@ import javax.swing.JOptionPane;
 
 public class ControladorVista implements ActionListener {
 
-    private vista view;
-    private modelo mod;
+    private vista vista;
+    private Modelo modelo;
 
-    public ControladorVista(vista view, modelo mod) {
-        this.view = view;
-        this.mod = mod;
-        this.view.btnEvaluar.addActionListener(this);
+    public ControladorVista(vista vista, Modelo modelo) {
+        this.vista = vista;
+        this.modelo = modelo;
+        this.vista.btnEvaluar.addActionListener(this);
     }
 
     public void iniciar() {
-        view.setTitle("calcular");
-        view.setLocationRelativeTo(null);
+        vista.setTitle("calcular");
+        vista.setLocationRelativeTo(null);
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         try {
-
             evaluar();
         } catch (Exception e) {
-            
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
     }
 
     private void evaluar() throws Exception {
-        String exp = view.txtExpresion.getText();
-        view.txtResultado.setText(String.valueOf(mod.calc(exp)));
+        String expresion = vista.txtExpresion.getText();
+        vista.txtResultado.setText(String.valueOf(modelo.calc(expresion)));
     }
 }
