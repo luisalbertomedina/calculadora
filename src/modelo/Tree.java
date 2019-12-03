@@ -53,29 +53,7 @@ public abstract class Tree {
 
    
 
-    public static class Bracket extends Tree {
-
-        Tree expr;
-
-        Bracket(Tree e) {
-            expr = e;
-        }
-
-        @Override
-        int getKind() {
-            return BRACKET;
-        }
-
-        @Override
-        int getPrefix() {
-            return 1;
-        }
-
-        @Override
-        int getPostfix() {
-            return 1;
-        }
-    }
+    
 
   
     public static class Add extends Tree {

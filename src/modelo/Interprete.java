@@ -23,7 +23,7 @@ public class Interprete {
             case Tree.ID:
                 return eval((Id) tree);
             case Tree.BRACKET:
-                return eval((Tree.Bracket) tree);
+                return eval((Bracket) tree);
             case Tree.ADD:
                 return eval((Tree.Add) tree);
             case Tree.SUB:
@@ -45,7 +45,7 @@ public class Interprete {
         return simbolos[t.ref].valor;
     }
 
-    private double eval(Tree.Bracket t) {
+    private double eval(Bracket t) {
         return eval(t.expr);
     }
 
