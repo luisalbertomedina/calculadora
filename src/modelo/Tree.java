@@ -51,34 +51,6 @@ public abstract class Tree {
 
     abstract int getPostfix();
 
-/* 
-    public static class Error extends Tree {
-
-        String message;
-        int start, end;
-
-        Error(int s, int e) {
-            start = s;
-            end = e;
-        }
-
-        @Override
-        int getKind() {
-            return ERROR;
-        }
-
-        @Override
-        int getPrefix() {
-            return 0;
-        }
-
-        @Override
-        int getPostfix() {
-            return 0;
-        }
-    }
-
-  */
     public static class Id extends Tree {
 
         int ref, start;
