@@ -34,11 +34,11 @@ public class Grammar {
     };
 
     private static Rule[] primRules = {
-        new Rule.Skip(Symbol.END), new Rule.Skip(Symbol.PLUS),
-        new Rule.Skip(Symbol.MINUS), new Rule.Skip(Symbol.TIMES),
-        new Rule.Skip(Symbol.SLASH), new Rule.Skip(Symbol.HAT),
-        new Rule.Skip(Symbol.OPEN), new Rule.Skip(Symbol.CLOSE),
-        new Rule.Accept(Symbol.NUMBER), new Rule.Build(Tree.ADD, 2),
+        new Rule.Skip(Simbolo.END), new Rule.Skip(Simbolo.PLUS),
+        new Rule.Skip(Simbolo.MINUS), new Rule.Skip(Simbolo.TIMES),
+        new Rule.Skip(Simbolo.SLASH), new Rule.Skip(Simbolo.HAT),
+        new Rule.Skip(Simbolo.OPEN), new Rule.Skip(Simbolo.CLOSE),
+        new Rule.Accept(Simbolo.NUMBER), new Rule.Build(Tree.ADD, 2),
         new Rule.Build(Tree.SUB, 2), new Rule.Build(Tree.MUL, 2),
         new Rule.Build(Tree.DIV, 2), new Rule.Build(Tree.POW, 2),
         new Rule.Build(Tree.BRACKET, 1), new Rule.Empty()
