@@ -192,7 +192,7 @@ public class Scanner {
             ref = (Integer) table.get(spelling);
             if (ref == null) {
                 int r = syms.size();
-                if (tok.kind == Symbol.NUMBER) {
+                if (tok.kind == Simbolo.NUMBER) {
                     double val = Double.parseDouble(spelling);
                     syms.add(new Simbolo(spelling, tok.kind, val));
                 } else if (tok.kind == Simbolo.KEY_OR_BAD_CHAR) {
