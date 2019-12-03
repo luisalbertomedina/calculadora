@@ -1,7 +1,7 @@
 /**
  * Clase Interpretador, evalúa la expresión en el árbol
  */
-package modelo;
+package Modelo;
 
 public class Interprete {
 

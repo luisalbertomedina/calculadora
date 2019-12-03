@@ -1,5 +1,5 @@
 
-package modelo;
+package Modelo;
 
 
 public class Simbolo {

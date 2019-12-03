@@ -14,7 +14,7 @@
  *
  * The build methods allow a tree node of a given kind to be built.
  */
-package modelo;
+package Modelo;
 
 public abstract class Tree {
 

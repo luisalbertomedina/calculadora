@@ -5,7 +5,7 @@
  */
 package Controlador;
 
-import modelo.Modelo;
+import Modelo.Modelo;
 import vista.vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

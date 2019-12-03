@@ -6,7 +6,7 @@
 package Controlador;
 
 
-import modelo.Modelo;
+import Modelo.Modelo;
 import vista.vista;
 
 

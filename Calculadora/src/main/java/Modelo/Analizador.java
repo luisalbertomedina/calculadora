@@ -1,6 +1,6 @@
 /* Class Analizador - parses the Calc language using a simple interpretive
 recursive descent parser. */
-package modelo;
+package Modelo;
 
 
 import java.util.*;
