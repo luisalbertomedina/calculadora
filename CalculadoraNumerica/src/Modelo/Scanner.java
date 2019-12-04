@@ -34,12 +34,7 @@ public class Scanner {
      */
  
 
-    /**
-     * A pre-token is a temporary data structure for holding tokens after
-     * splitting, but before symbolizing. A pre-token has start and end
-     * positions in the source text, and a tentative kind tag, to be refined
-     * later by symbolize().
-     */
+  
     private static class PreToken {
 
         int start, end, kind;
@@ -51,11 +46,7 @@ public class Scanner {
         }
     }
 
-    /**
-     * Split the prepared source text into pre-tokens. Key recognition is left
-     * to the symbolize stage. (In a larger language, simple keys would be
-     * recognized here, but keywords would be left to later.)
-     */
+    
     private PreToken[] split(String source) {
         Vector toks = new Vector();
         for (int i = 0; i < source.length(); i++) {
@@ -88,9 +79,7 @@ public class Scanner {
         return (PreToken[]) toks.toArray(new PreToken[0]);
     }
 
-    /**
-     * Get a number from the source text, starting at a given position
-     */
+  
     private PreToken number(String source, int i) {
         PreToken num;
         int j = i, n = source.length();
@@ -113,9 +102,7 @@ public class Scanner {
         return num;
     }
 
-    /**
-     * Convert the pre-tokens into tokens which refer to a symbol table
-     */
+    
     private void symbolize(Program program, PreToken[] toks) {
         String source = program.source;
         HashMap table = new HashMap();
@@ -129,7 +116,7 @@ public class Scanner {
             PreToken tok = toks[i];
             String spelling;
             Integer ref;
-            // s.substring() does not cope with the empty substring at the end of s
+            
             if (tok.start == source.length()) {
                 spelling = "";
             } else {
