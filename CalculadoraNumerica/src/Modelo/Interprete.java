@@ -12,10 +12,10 @@ public class Interprete {
 
     public double interpret(Program program) {
         simbolos = program.simbolos;
-        return eval(program.tree);
+        return evaluate(program.tree);
     }
 
-    private double eval(Tree tree) {
+    private double evaluate(Tree tree) {
         switch (tree.getKind()) {
             case Tree.ID:
                 return eval((Tree.Id) tree);
@@ -43,26 +43,26 @@ public class Interprete {
     }
 
     private double eval(Tree.Bracket t) {
-        return eval(t.expr);
+        return evaluate(t.expresion);
     }
 
     private double eval(Tree.Add t) {
-        return eval(t.left) + eval(t.right);
+        return evaluate(t.left) + evaluate(t.right);
     }
 
     private double eval(Tree.Sub t) {
-        return eval(t.left) - eval(t.right);
+        return evaluate(t.left) - evaluate(t.right);
     }
 
     private double eval(Tree.Mul t) {
-        return eval(t.left) * eval(t.right);
+        return evaluate(t.left) * evaluate(t.right);
     }
 
     private double eval(Tree.Div t) {
-        return eval(t.left) / eval(t.right);
+        return evaluate(t.left) / evaluate(t.right);
     }
 
     private double eval(Tree.Pow t) {
-        return Math.pow(eval(t.left), eval(t.right));
+        return Math.pow(evaluate(t.left), evaluate(t.right));
     }
 }

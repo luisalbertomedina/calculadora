@@ -16,13 +16,4 @@ public class Program {
     }
 
     
-    public static class Range {
-        int start;
-        int end;
-    }
-
-    public Range findRange(Tree tree) {
-        System.out.println("Program.range() undefined");
-        return new Range();
-    }
 }

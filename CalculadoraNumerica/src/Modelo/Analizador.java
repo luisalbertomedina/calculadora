@@ -1,5 +1,4 @@
-/* Class Analizador - parses the Calc language using a simple interpretive
-recursive descent parser. */
+/* Clase analizador - usa un intérprete para saber el resultado y si se acepta la cadena */
 package Modelo;
 
 
@@ -20,13 +19,13 @@ public class Analizador {
     }
 
    
-    public Program parse(Program program) throws Exception {
+    public Program analizar (Program program) throws Exception {
         tokens = program.tokens;
         symbols = program.simbolos;
         next = 0;
         nextKind = symbols[tokens[next].ref].tipooperador;
         nodes = new Stack();
-        parse(rules[0]);
+        analizar(rules[0]);
         if (nodes.size() != 1) {
             throw new Exception("Internal error: parse produces wrong no of nodes");
         }
@@ -35,7 +34,7 @@ public class Analizador {
     }
 
     
-    private void parse(Rule rule) throws Exception {
+    private void analizar (Rule rule) throws Exception {
         switch (rule.getKind()) {
             case Rule.THEN:
                 parse((Rule.Then) rule);
@@ -58,15 +57,15 @@ public class Analizador {
     }
 
     private void parse(Rule.Then rule) throws Exception {
-        parse(rules[rule.left]);
-        parse(rules[rule.right]);
+        analizar(rules[rule.left]);
+        analizar(rules[rule.right]);
     }
 
     private void parse(Rule.Or rule) throws Exception {
         if (startsWith(rules[rule.left], nextKind)) {
-            parse(rules[rule.left]);
+            analizar(rules[rule.left]);
         } else {
-            parse(rules[rule.right]);
+            analizar(rules[rule.right]);
         }
     }
 
@@ -95,13 +94,13 @@ public class Analizador {
         Tree firstNode, secondNode;
         if (rule.size == 1) {
             firstNode = (Tree) nodes.pop();
-            nodes.add(Tree.build1(rule.kind, firstNode));
+            nodes.add(Tree.firstBuild(rule.kind, firstNode));
         } else if (rule.size == 2) {
             secondNode = (Tree) nodes.pop();
             firstNode = (Tree) nodes.pop();
-            nodes.add(Tree.build2(rule.kind, firstNode, secondNode));
+            nodes.add(Tree.secondBuild(rule.kind, firstNode, secondNode));
         } else {
-            throw new Exception("Internal error: unimplemented node size");
+            throw new Exception("Error interno: se produjo mal número de nodos");
         }
     }
 

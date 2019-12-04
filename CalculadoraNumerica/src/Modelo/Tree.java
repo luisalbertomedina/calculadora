@@ -6,7 +6,7 @@ public abstract class Tree {
     public static final int ERROR = 0, ID = 1, BRACKET = 2, ADD = 3, SUB = 4, MUL = 5, DIV = 6, POW = 7;
 
     
-    static Tree build1(int kind, Tree node) {
+    static Tree firstBuild(int kind, Tree node) {
         if (kind != BRACKET) {
             System.out.println("Error interno: tipo de árbol incorrecto");
             System.exit(1);
@@ -15,18 +15,18 @@ public abstract class Tree {
     }
 
     
-    public static Tree build2(int kind, Tree node1, Tree node2) {
+    public static Tree secondBuild(int kind, Tree firstNode, Tree secondNode) {
         switch (kind) {
             case ADD:
-                return new Add(node1, node2);
+                return new Add(firstNode, secondNode);
             case SUB:
-                return new Sub(node1, node2);
+                return new Sub(firstNode, secondNode);
             case MUL:
-                return new Mul(node1, node2);
+                return new Mul(firstNode, secondNode);
             case DIV:
-                return new Div(node1, node2);
+                return new Div(firstNode, secondNode);
             case POW:
-                return new Pow(node1, node2);
+                return new Pow(firstNode, secondNode);
             default:
                 System.out.println("Error interno: tipo de árbol incorrecto");
                 System.exit(1);
@@ -41,41 +41,16 @@ public abstract class Tree {
 
     abstract int getPostfix();
 
-    
-    public static class Error extends Tree {
-
-        String message;
-        int start, end;
-
-        Error(int s, int e) {
-            start = s;
-            end = e;
-        }
-
-        @Override
-        int getKind() {
-            return ERROR;
-        }
-
-        @Override
-        int getPrefix() {
-            return 0;
-        }
-
-        @Override
-        int getPostfix() {
-            return 0;
-        }
-    }
+  
 
     
     public static class Id extends Tree {
 
         int ref, start;
 
-        Id(int r, int s) {
-            ref = r;
-            start = s;
+        Id(int ref, int start) {
+            this.ref = ref;
+            this.start = start;
         }
 
         @Override
@@ -97,10 +72,10 @@ public abstract class Tree {
     
     public static class Bracket extends Tree {
 
-        Tree expr;
+        Tree expresion;
 
-        Bracket(Tree e) {
-            expr = e;
+        Bracket(Tree expresion) {
+            this.expresion = expresion;
         }
 
         @Override
@@ -124,9 +99,9 @@ public abstract class Tree {
 
         Tree left, right;
 
-        Add(Tree l, Tree r) {
-            left = l;
-            right = r;
+        Add(Tree left, Tree right) {
+            this.left = left;
+            this.right = right;
         }
 
         @Override
@@ -149,9 +124,9 @@ public abstract class Tree {
 
         Tree left, right;
 
-        Sub(Tree l, Tree r) {
-            left = l;
-            right = r;
+        Sub(Tree left, Tree right) {
+            this.left = left;
+            this.right = right;
         }
 
         @Override
@@ -174,9 +149,9 @@ public abstract class Tree {
 
         Tree left, right;
 
-        Mul(Tree l, Tree r) {
-            left = l;
-            right = r;
+        Mul(Tree left, Tree right) {
+            this.left = left;
+           this.right = right;
         }
 
         @Override
@@ -199,9 +174,9 @@ public abstract class Tree {
 
         Tree left, right;
 
-        Div(Tree l, Tree r) {
-            left = l;
-            right = r;
+        Div(Tree left, Tree right) {
+            this.left = left;
+           this.right = right;
         }
 
         @Override
@@ -224,9 +199,9 @@ public abstract class Tree {
 
         Tree left, right;
 
-        Pow(Tree l, Tree r) {
-            left = l;
-            right = r;
+        Pow(Tree left, Tree right) {
+            this.left = left;
+           this.right = right;
         }
 
         @Override
