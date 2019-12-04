@@ -27,7 +27,7 @@ public class Analizador {
         nodes = new Stack();
         analizar(rules[0]);
         if (nodes.size() != 1) {
-            throw new Exception("Internal error: parse produces wrong no of nodes");
+            throw new Exception("Error interno: se produjo mal número de nodos");
         }
         program.tree = (Tree) nodes.pop();
         return program;
@@ -100,7 +100,7 @@ public class Analizador {
             firstNode = (Tree) nodes.pop();
             nodes.add(Tree.secondBuild(rule.kind, firstNode, secondNode));
         } else {
-            throw new Exception("Error interno: se produjo mal número de nodos");
+            throw new Exception("Error interno: tamaño de nodo no implementado");
         }
     }
 

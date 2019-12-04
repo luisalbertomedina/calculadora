@@ -106,7 +106,7 @@ public class Grammar {
         int[] altIndexes, altStarts, altEnds;
 
         if (def.length < 4 || !def[1].equals("=")) {
-            System.out.println("Internal error: bad grammar rule");
+            System.out.println("Error interno: regla de gramatica no valida");
             System.exit(1);
         }
 
@@ -134,7 +134,7 @@ public class Grammar {
         for (int i = 0; i < nalts - 1; i++) {
             int n = altEnds[i] - altStarts[i];
             if (n < 1) {
-                System.out.println("Internal error: empty alternative");
+                System.out.println("Error interno: alternativa vacía");
                 System.exit(1);
             }
             altIndexes[i + 1] = altIndexes[i] + n - 1;
@@ -187,7 +187,7 @@ public class Grammar {
             i++;
         }
         if (n < 0) {
-            System.out.println("Internal error: can't find " + string);
+            System.out.println("Error interno: No se encuentra" + string);
             System.exit(1);
         }
         return n;
